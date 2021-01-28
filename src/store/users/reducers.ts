@@ -10,7 +10,21 @@ const initialState: UsersState = {
 
 export const usersReducers: Reducer<UsersState, UsersActions> = produce(
   (draft: Draft<UsersState>, action: UsersActions) => {
-    console.log(draft, action);
+    switch (action.type) {
+      case "users/received": {
+        draft.ids = action.payload.ids;
+        draft.entities = action.payload.users;
+        break;
+      }
+      case "dummy": {
+        console.log("dummy", draft);
+        break;
+      }
+      default: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const _: never = action;
+      }
+    }
   },
   initialState
 );

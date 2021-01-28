@@ -23,9 +23,9 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
     "prettier",
     "prettier/react",
     "prettier/@typescript-eslint"
@@ -38,8 +38,10 @@
       "files": ["*.js", "*.ts", "*.tsx"],
       "rules": {
         "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/explicit-function-return-type": 0,
-        "@typescript-eslint/explicit-module-boundary-types": 0
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react/jsx-uses-react": "off", // React 17 から import React from 'react' する必要がない
+        "react/react-in-jsx-scope": "off"
       }
     }
   ]

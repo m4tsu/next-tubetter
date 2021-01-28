@@ -5,12 +5,17 @@ import {
   normalizeVideos,
   Video,
 } from "@/store/videos/models";
+import firebase from "firebase";
 
 const user: User = {
   uid: "user1",
   pthotoURL: "photoURL",
   displayName: "User1",
 };
+const today = firebase.firestore.Timestamp.fromDate(
+  new Date("December 10, 2020")
+);
+
 const videos: Video[] = [
   {
     id: "test1",
@@ -21,6 +26,8 @@ const videos: Video[] = [
     user: user,
     tags: ["tagA", "tagB"],
     likeCount: 1,
+    createdAt: today,
+    updatedAt: today,
   },
   {
     id: "test2",
@@ -31,6 +38,8 @@ const videos: Video[] = [
     user: user,
     tags: ["tag!!!!", "tag000000"],
     likeCount: 0,
+    createdAt: today,
+    updatedAt: today,
   },
 ];
 
@@ -53,6 +62,8 @@ const normalizedVideos: {
         user: user.uid,
         tags: ["tagA", "tagB"],
         likeCount: 1,
+        createdAt: today,
+        updatedAt: today,
       },
       test2: {
         id: "test2",
@@ -63,6 +74,8 @@ const normalizedVideos: {
         user: user.uid,
         tags: ["tag!!!!", "tag000000"],
         likeCount: 0,
+        createdAt: today,
+        updatedAt: today,
       },
     },
     users: {

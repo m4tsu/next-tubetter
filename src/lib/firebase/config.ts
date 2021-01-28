@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/functions";
 
-if( process.browser && firebase.apps.length === 0){
+if (firebase.apps.length === 0) {
   const config = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -13,8 +13,8 @@ if( process.browser && firebase.apps.length === 0){
     messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
     // measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-  }
-  firebase.initializeApp(config)
+  };
+  firebase.initializeApp(config);
 }
 const auth = firebase.auth();
 const db = firebase.firestore();

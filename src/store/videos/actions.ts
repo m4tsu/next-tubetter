@@ -3,6 +3,8 @@ import {
   NormalizedVideosEntities,
   Video,
 } from "@/store/videos/models";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
 
 export const receiveVideos = (
   videos: NormalizedVideosEntities,
@@ -18,3 +20,5 @@ export const addVideos = (video: NormalizedVideo) => ({
 });
 
 export type VideosActions = ReturnType<typeof receiveVideos | typeof addVideos>;
+
+export const useVideosDispatch = () => useDispatch<Dispatch<VideosActions>>();

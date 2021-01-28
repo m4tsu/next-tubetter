@@ -1,9 +1,18 @@
-import React from 'react'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { Hoge } from '@/components/Hoge'
+import { useEffect } from 'react';
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import { Hoge } from '@/components/Hoge';
+import { useFetchVideos } from '@/store/videos/operations';
+import { useSelector } from '@/store/store';
+import { getVideos } from '@/store/videos/selectors';
 
 export default function Home() {
+  const { fetchVideos } = useFetchVideos();
+  const videos = useSelector(getVideos);
+  console.log('videos', videos);
+  useEffect(() => {
+    fetchVideos('lruz1an6aAMvGKMHteoEFo17Fd32');
+  }, [fetchVideos]);
   return (
     <div className={styles.container}>
       <Head>
@@ -12,7 +21,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Hoge/>
+        <Hoge />
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -64,5 +73,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  )
+  );
 }
