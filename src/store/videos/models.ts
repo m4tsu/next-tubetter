@@ -2,10 +2,11 @@ import {
   User,
   userNormalizrSchema,
   userNormalizrSchemaKey,
-  NormalizedUsersEntities,
+  NormalizedUsers,
 } from '@/store/users/model';
 import { schema, normalize, denormalize } from 'normalizr';
 import firebase from 'firebase/app';
+import { TimeStamp } from '@/lib/firebase/config';
 
 export type VideoType = 'video' | 'playlist' | 'nicovideo';
 
@@ -18,21 +19,26 @@ export type Video = {
   user: User;
   tags: string[]; //tagIDの配列
   likeCount: number;
-  createdAt: firebase.firestore.Timestamp;
-  updatedAt: firebase.firestore.Timestamp;
+  createdAt: TimeStamp;
+  updatedAt: TimeStamp;
 };
 
 export type NormalizedVideo = Omit<Video, 'user'> & {
   user: User['uid'];
 };
 
-export type NormalizedVideosEntities = {
+export type NormalizedVideos = {
   [id: string]: NormalizedVideo;
 };
 
 export type VideosState = Readonly<{
-  ids: Video['id'][];
-  entities: NormalizedVideosEntities;
+  recentVideos: {
+    ids: Video['id'][];
+    isLoading: boolean;
+    isMoreLoading: boolean;
+    isAllFetched: boolean;
+    lastVideoDoc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData> | null;
+  };
 }>;
 
 export const videoNormalizrSchemaKey = 'videos' as const;
@@ -75,8 +81,8 @@ export const normalizeVideos = (videos: Video[]) =>
   normalize<
     Video,
     {
-      [videoNormalizrSchemaKey]: NormalizedVideosEntities;
-      [userNormalizrSchemaKey]: NormalizedUsersEntities;
+      [videoNormalizrSchemaKey]: NormalizedVideos;
+      [userNormalizrSchemaKey]: NormalizedUsers;
     },
     Video['id'][]
   >(videos, [videoNormalizrSchema]);

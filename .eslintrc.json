@@ -41,7 +41,8 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "react/jsx-uses-react": "off", // React 17 から import React from 'react' する必要がない
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "react/display-name": "off"
       }
     }
   ]

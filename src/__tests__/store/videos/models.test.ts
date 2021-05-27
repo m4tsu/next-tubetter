@@ -1,42 +1,42 @@
-import { NormalizedUsersEntities, User } from "@/store/users/model";
+import { NormalizedUsers, User } from '@/store/users/model';
 import {
   denormalizeVideos,
-  NormalizedVideosEntities,
+  NormalizedVideos,
   normalizeVideos,
   Video,
-} from "@/store/videos/models";
-import firebase from "firebase";
+} from '@/store/videos/models';
+import firebase from 'firebase';
 
 const user: User = {
-  uid: "user1",
-  pthotoURL: "photoURL",
-  displayName: "User1",
+  uid: 'user1',
+  photoURL: 'photoURL',
+  displayName: 'User1',
 };
 const today = firebase.firestore.Timestamp.fromDate(
-  new Date("December 10, 2020")
+  new Date('December 10, 2020')
 );
 
 const videos: Video[] = [
   {
-    id: "test1",
-    videoId: "youtube001",
-    type: "video",
-    title: "testVideo1",
-    comment: "good!!!",
+    id: 'test1',
+    videoId: 'youtube001',
+    type: 'video',
+    title: 'testVideo1',
+    comment: 'good!!!',
     user: user,
-    tags: ["tagA", "tagB"],
+    tags: ['tagA', 'tagB'],
     likeCount: 1,
     createdAt: today,
     updatedAt: today,
   },
   {
-    id: "test2",
-    videoId: "youtube002",
-    type: "video",
-    title: "testVideo2",
-    comment: "good!!!",
+    id: 'test2',
+    videoId: 'youtube002',
+    type: 'video',
+    title: 'testVideo2',
+    comment: 'good!!!',
     user: user,
-    tags: ["tag!!!!", "tag000000"],
+    tags: ['tag!!!!', 'tag000000'],
     likeCount: 0,
     createdAt: today,
     updatedAt: today,
@@ -46,33 +46,33 @@ const videos: Video[] = [
 const normalizedVideos: {
   result: string[];
   entities: {
-    videos: NormalizedVideosEntities;
-    users: NormalizedUsersEntities;
+    videos: NormalizedVideos;
+    users: NormalizedUsers;
   };
 } = {
-  result: ["test1", "test2"],
+  result: ['test1', 'test2'],
   entities: {
     videos: {
       test1: {
-        id: "test1",
-        videoId: "youtube001",
-        type: "video",
-        title: "testVideo1",
-        comment: "good!!!",
+        id: 'test1',
+        videoId: 'youtube001',
+        type: 'video',
+        title: 'testVideo1',
+        comment: 'good!!!',
         user: user.uid,
-        tags: ["tagA", "tagB"],
+        tags: ['tagA', 'tagB'],
         likeCount: 1,
         createdAt: today,
         updatedAt: today,
       },
       test2: {
-        id: "test2",
-        videoId: "youtube002",
-        type: "video",
-        title: "testVideo2",
-        comment: "good!!!",
+        id: 'test2',
+        videoId: 'youtube002',
+        type: 'video',
+        title: 'testVideo2',
+        comment: 'good!!!',
         user: user.uid,
-        tags: ["tag!!!!", "tag000000"],
+        tags: ['tag!!!!', 'tag000000'],
         likeCount: 0,
         createdAt: today,
         updatedAt: today,
@@ -84,13 +84,13 @@ const normalizedVideos: {
   },
 };
 
-describe("normalize", () => {
-  it("valid normalize", () => {
+describe('normalize', () => {
+  it('valid normalize', () => {
     const normalized = normalizeVideos(videos);
     expect(normalized).toMatchObject(normalizedVideos);
   });
 
-  it("valid denormalize", () => {
+  it('valid denormalize', () => {
     expect(denormalizeVideos(normalizedVideos)).toMatchObject(videos);
   });
 });

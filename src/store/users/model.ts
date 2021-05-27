@@ -1,37 +1,36 @@
-import { denormalize, normalize, schema } from "normalizr";
+import { denormalize, normalize, schema } from 'normalizr';
 
 export type User = {
   uid: string;
-  pthotoURL: string;
+  photoURL: string;
   displayName: string;
 };
 
-export const userNormalizrSchemaKey = "users" as const;
+export const userNormalizrSchemaKey = 'users' as const;
 
 export const userNormalizrSchema = new schema.Entity<User>(
   userNormalizrSchemaKey,
   {},
   {
-    idAttribute: "uid",
+    idAttribute: 'uid',
   }
 );
 
-export type NormalizedUsersEntities = {
+export type NormalizedUsers = {
   [uid: string]: User;
 };
 
 export type UsersState = Readonly<{
-  ids: User["uid"][];
-  entities: NormalizedUsersEntities;
+  ids: User['uid'][];
 }>;
 
 export const normalizeUsers = (users: User[]) =>
   normalize<
     User,
     {
-      [userNormalizrSchemaKey]: NormalizedUsersEntities;
+      [userNormalizrSchemaKey]: NormalizedUsers;
     },
-    User["uid"][]
+    User['uid'][]
   >(users, [userNormalizrSchema]);
 
 export const denormalizeVideos = (

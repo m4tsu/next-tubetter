@@ -1,7 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import "firebase/functions";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+import 'firebase/functions';
 
 if (firebase.apps.length === 0) {
   const config = {
@@ -18,5 +18,8 @@ if (firebase.apps.length === 0) {
 }
 const auth = firebase.auth();
 const db = firebase.firestore();
-const functions = firebase.app().functions("asia-northeast1");
+const functions = firebase.app().functions('asia-northeast1');
 export { firebase, auth, db, functions };
+export type Credential = firebase.auth.UserCredential;
+export type TimeStamp = firebase.firestore.Timestamp;
+export const provider = new firebase.auth.TwitterAuthProvider();

@@ -1,16 +1,13 @@
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { NormalizedUsersEntities, User } from "./model";
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { NormalizedUsers, User } from './model';
 
 export const dummyAction = () => ({
-  type: "dummy" as const,
+  type: 'dummy' as const,
 });
 
-export const receiveUsers = (
-  users: NormalizedUsersEntities,
-  ids: User["uid"][]
-) => ({
-  type: "users/received" as const,
+export const receiveUsers = (users: NormalizedUsers, ids: User['uid'][]) => ({
+  type: 'users/received' as const,
   payload: { users, ids },
 });
 

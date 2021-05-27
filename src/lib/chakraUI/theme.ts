@@ -11,6 +11,8 @@ export const breakpoints = createBreakpoints({
 export const theme = extendTheme({
   colors: {
     primary: '#00b5ad',
+    secondary: '#e1f7f7',
+    'bg-teal': '#f8ffff',
   },
   breakpoints,
   components: {
